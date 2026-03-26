@@ -3,7 +3,7 @@ import mlflow
 import pandas as pd
 
 from sklearn.model_selection import train_test_split
-from sklearn.dummy import DummyClassifier
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 
 
@@ -23,7 +23,7 @@ def main():
         X, y, test_size=0.2, random_state=42, stratify=y
     )
 
-    model = DummyClassifier(strategy="most_frequent")
+    model = LogisticRegression(max_iter=200)
 
     with mlflow.start_run() as run:
         model.fit(X_train, y_train)
