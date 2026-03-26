@@ -27,6 +27,12 @@ jobs:
         run: |
           pip install -r requirements.txt
 
+      - name: Configure DVC auth
+        run: |
+          dvc remote modify origin --local auth basic
+          dvc remote modify origin --local user ${{ secrets.DVC_USER }}
+          dvc remote modify origin --local password ${{ secrets.DVC_PASSWORD }}
+
       - name: Pull data with DVC
         run: |
           dvc pull
